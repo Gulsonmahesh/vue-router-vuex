@@ -1,26 +1,29 @@
 <template>
   <div id="app">
+    <HeaderComp :headertext="msg" />
+    <Bookform />
     <Book :title="book" />
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import Book from './components/Books';
+import Bookform from './components/Bookform';
 import bookData from './assets/books.json';
+import HeaderComp from './components/Header';
 
-// let books = [1,2,3,4,5]
 export default {
   name: 'App',
   data () {
     return {
-     book : bookData
+     book : bookData,
+     msg: 'Demonstration of Directives and Data Bindings'
     }
   },
   components: {
-    // HelloWorld, 
-    Book
+    Bookform, 
+    Book,
+    HeaderComp
   }
 }
 </script>
@@ -35,8 +38,8 @@ html, body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  /* text-align: center; */
+  color: #2c3e50;  
+  margin: 10px;
 }
 </style>

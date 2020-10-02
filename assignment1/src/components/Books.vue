@@ -1,10 +1,9 @@
 <template>
-    <div>
-    <div class="container" id="booktable">
+    <div class="container mt-2" id="booktable">
         <div class="row">
             <div class="column">
-                <div class="table-responsive">
-                <table class="table table-striped table-hover">
+                <div v-if="book.length" class="table-responsive">
+                    <table class="table table-striped table-hover">
                     <caption>List of Books</caption>
                     <thead class="thead-dark">
                         <tr>
@@ -20,11 +19,13 @@
                     <td>{{item.published}}</td>
                     </tr>
                     </tbody>
-                </table>
+                    </table>
+                </div>
+                <div v-else>
+                    <h2 class="nobook text-left p-2">No Books Available. Please add some Books</h2>
                 </div>
             </div>
         </div>
-    </div>    
     </div>
 </template>
 <script>
@@ -42,6 +43,9 @@ export default {
 <style scoped>
 #booktable {
     display: flex;
+}
+.nobook {
+    font-size: 1.5em;
 }
 caption {
     caption-side: top;

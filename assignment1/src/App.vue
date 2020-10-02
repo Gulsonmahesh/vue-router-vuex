@@ -8,11 +8,14 @@
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 import Book from './components/Books';
+import bookData from './assets/books.json';
+
+// let books = [1,2,3,4,5]
 export default {
   name: 'App',
   data () {
     return {
-     book : [1,2,3]
+     book : bookData
     }
   },
   components: {

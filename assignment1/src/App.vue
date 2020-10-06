@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <HeaderComp :headertext="msg" />
+    <HeaderComp :includeClass= "true" :headertext="msg" />
+    <hr class="border">
+    <Newbook :bookdata="newbookinfo" v-if="newbookstatus" />
     <Bookform @addbook="addbook"/>
     <Book :title="book" />
   </div>
@@ -10,19 +12,23 @@
 import Book from './components/Books';
 import Bookform from './components/Bookform';
 import HeaderComp from './components/Header';
+import Newbook from './components/Newbook';
 
 export default {
   name: 'App',
   data () {
     return {
      book : {"books": []},
-     msg: 'Demonstration of Directives and Data Bindings',
+     msg: 'Demonstration of Passing data between components, style demo',
+     newbookinfo: null,
+     newbookstatus: false
     }
   },
   components: {
     Bookform, 
     Book,
-    HeaderComp
+    HeaderComp,
+    Newbook
   },
   methods: {
     addbook(data) {
@@ -35,10 +41,13 @@ export default {
       } else {
         let newBook = {
           "bookname": data[0],
-          "published": data[1]
+          "published": data[1],
+          "price": data[2],
         }
-        this.book.books.push(newBook);
-        alreadyExist = false;
+        this.newbookinfo = newBook;
+        console.log(this.newbookinfo);
+        this.newbookstatus = true;
+        this.book.books.unshift(newBook);        
       }
     }
   }

@@ -1,5 +1,10 @@
 <template>
     <div class="container mt-2" id="booktable">
+        <div class="row" v-if="book.length">
+            <div class="column">
+                <h2 :style="{ color, fontSize}"> Books List - Technology</h2>
+            </div>
+        </div>
         <div class="row">
             <div class="column">
                 <div v-if="book.length" class="table-responsive">
@@ -8,15 +13,17 @@
                     <thead class="thead-dark">
                         <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Book Name</th>
+                        <th scope="col">Title</th>
                         <th scope="col">Published. Year</th>
+                        <th scope="col">Price</th>
                         </tr>
                     </thead>
                     <tbody class="">
-                    <tr v-for="(item, index) in book" :key="item.isbn">
-                    <th scope="row">{{++index}}</th>
+                    <tr v-for="(item, index) in book" :key="item.index">
+                    <td scope="row">{{++index}}</td>
                     <td>{{item.bookname}}</td>
                     <td>{{item.published}}</td>
+                    <td>${{item.price}}</td>
                     </tr>
                     </tbody>
                     </table>
@@ -35,19 +42,29 @@ export default {
         title : Object
     },
     data () {
-    return {
-     book : this.title.books
-    }}    
+        return {
+            book : this.title.books,
+            color: 'green',
+            fontSize: '2em'
+        }
+    }    
 }
 </script>
 <style scoped>
-#booktable {
-    display: flex;
-}
 .nobook {
     font-size: 1.5em;
 }
 caption {
     caption-side: top;
+}
+table thead th {
+    vertical-align: initial !important;
+}
+th {
+    color: violet !important;
+    font-size: 1.4em;
+}
+td {
+    font-size: 1.4em;
 }
 </style>

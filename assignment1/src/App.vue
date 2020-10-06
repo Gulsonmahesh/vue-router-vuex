@@ -13,12 +13,13 @@ import Book from './components/Books';
 import Bookform from './components/Bookform';
 import HeaderComp from './components/Header';
 import Newbook from './components/Newbook';
+import axios from 'axios';
 
 export default {
   name: 'App',
   data () {
     return {
-     book : {"books": []},
+     book : [],
      msg: 'Demonstration of Passing data between components, style demo',
      newbookinfo: null,
      newbookstatus: false
@@ -30,12 +31,20 @@ export default {
     HeaderComp,
     Newbook
   },
+  mounted() {
+    this.getBookData();
+  },
   methods: {
+    getBookData() {
+      axios.get('http://localhost:3001/books').then(bookdata => {
+        this.book = bookdata.data;
+      });
+    },
     addbook(data) {
-      let alreadyExist = this.book.books.filter(book => {
+      let alreadyExist = this.book.filter(book => {
         return book.bookname === data[0] && book.published === data[1];
       });
-      if (this.book.books.length && alreadyExist.length) {
+      if (this.book.length && alreadyExist.length) {
         alert('Book already Exit');
         return false;
       } else {
@@ -44,10 +53,18 @@ export default {
           "published": data[1],
           "price": data[2],
         }
-        this.newbookinfo = newBook;
-        console.log(this.newbookinfo);
-        this.newbookstatus = true;
-        this.book.books.unshift(newBook);        
+        axios.post('http://localhost:3001/books', newBook).then (Response => {
+          console.log(Response);
+          if(Response.status === 201) {
+            this.newbookinfo = newBook;
+            console.log(this.newbookinfo);
+            this.newbookstatus = true;
+            this.book.unshift(newBook);
+          } else {
+            alert('Unable to Add New Book');
+          }
+        })
+                
       }
     }
   }

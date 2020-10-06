@@ -14,7 +14,7 @@
                         <tr>
                         <th scope="col">#</th>
                         <th scope="col">Title</th>
-                        <th scope="col">Published. Year</th>
+                        <th scope="col">Publi. Year</th>
                         <th scope="col">Price</th>
                         </tr>
                     </thead>
@@ -39,15 +39,20 @@
 export default {
     name: 'Book',
     props : {
-        title : Object
+        title : Array
     },
     data () {
         return {
-            book : this.title.books,
+            book : this.title,
             color: 'green',
             fontSize: '2em'
         }
-    }    
+    },
+    watch: {
+        title : function(newTitle){
+            this.book = newTitle
+        }
+    }
 }
 </script>
 <style scoped>

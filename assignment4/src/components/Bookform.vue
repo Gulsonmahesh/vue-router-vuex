@@ -1,19 +1,19 @@
 <template>
-  <div class="container mb-3">
+  <div class="container-fluid m-5 p-0">
     <div class="row">
       <div class="column column-12">
         <form class="form">
-            <div class="form-group d-md-inline-block d-lg-inline-block d-sm-block mr-2">
+            <div class="form-group d-block">
                 <label for="booktitle" class="mr-5">Enter Book Title</label>
-                <input autocomplete="false" v-model.trim="bookname" type="text" class="form-control" id="booktitle" placeholder="Enter Book Title">
+                <input autocomplete="false" v-model.trim="formData.bookname" type="text" class="form-control" id="booktitle" placeholder="Enter Book Title">
             </div>
-            <div class="form-group d-md-inline-block d-lg-inline-block d-sm-block mr-2">
+            <div class="form-group d-block">
                 <label for="bookyear" class="mr-1">Enter Publication Year</label>
-                <input autocomplete="false" v-model.trim="bookyear" type="number" min="1000" max="9999" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;" class="form-control" id="bookyear" placeholder="Published Year" />
+                <input autocomplete="false" v-model.trim="formData.bookyear" type="number" min="2000" max="9999" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(formData.value.length==4) return false;" class="form-control" id="bookyear" placeholder="Published Year" />
             </div>
-            <div class="form-group d-md-inline-block d-lg-inline-block d-sm-block mr-2">
+            <div class="form-group d-block">
                 <label for="price" class="mr-1">Enter Price</label>
-                <input autocomplete="false" v-model.trim="price" type="number" min="1000" max="9999" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;" class="form-control" id="price" placeholder="Price" />
+                <input autocomplete="false" v-model.trim="formData.price" type="number" min="1" max="9999" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(formData.value.length==4) return false;" class="form-control" id="price" placeholder="Price" />
             </div>
             <button @click.prevent="addbook" class="btn btn-primary">Add Book</button>
         </form>        
@@ -22,24 +22,30 @@
   </div>
 </template>
 <script>
+import { reactive, watch } from 'vue';
+
 export default {
   name: "Bookform",
-  data () {
-    return {
+  setup(emit) {
+    let formData = reactive({
       bookname: null,
-      bookyear : null,
-      price: null
-    }
-  },
-  methods: {
-    addbook() {
-      if(this.bookname === null || this.bookyear === null || this.price === null) {
+      bookyear : 2000,
+      price: 1
+    })
+    function addbook() {
+      if(formData.bookname === null || formData.bookyear === null || formData.price === null) {
         alert('Please Enter all the details');
         return false;
       } else {
-        this.$emit('addbook', [this.bookname, this.bookyear, this.price]);
-        this.bookname = this.bookyear = this.price = '';
+        watch(() => {
+          emit('addbook', [formData.bookname, formData.bookyear, formData.price]);
+        formData.bookname = formData.bookyear = formData.price = '';
+        })
       }
+    }
+    return {
+      formData,
+      addbook
     }
   }
 };

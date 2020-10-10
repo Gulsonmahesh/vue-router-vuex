@@ -2,7 +2,7 @@
 <template> 
   <div class="container-fluid m-0 p-0" id="booktable">
     <div class="d-flex flex-row justify-content-between align-items-center m-2 text-left">
-      <h1 class="m-0">Want to add a new book.</h1>
+      <h1 class="m-0 d-none d-md-block d-lg-block">Want to add a new book.</h1>
       <button @click.prevent="navigate" class="btn btn-primary mr-1">Add Book</button>
     </div>
     <div v-if="bookdata.length">

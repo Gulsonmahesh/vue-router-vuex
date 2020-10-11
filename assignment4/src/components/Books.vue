@@ -35,7 +35,6 @@
                 <h2 class="card-title"><router-link class="nav-item nav-link active p-0"  :to="{ name: 'Viewbook', params: { bookid: item.id } }">{{item.bookname}}</router-link></h2>
                 <span class="card-text">{{`Publi.Date: ${item.published}`}}</span>
                 <p class="card-text">{{`Price : ${item.price}`}}</p>
-                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
             </div>
           </div>
         </div>
@@ -49,14 +48,17 @@
   </div>
 </template>
 <script>
-import axios from "axios";
-import { ref, onMounted } from "vue";
+// import axios from "axios";
+import { computed } from "vue";
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 
 export default {
   name: "Book",
   setup() {
-    let bookdata = ref([]);
+    const store = useStore();
+    const bookdata = computed( () => store.state.books)
+
     let color = "green";
     let fontSize = "1.5rem";
     const router = useRouter()
@@ -64,16 +66,6 @@ export default {
     let navigate = () => {
         router.push({ name: 'Addbook' })
     }
-
-    function getBookData() {
-      axios.get("http://localhost:3001/books").then((response) => {
-        bookdata.value = response.data;
-      });
-    }
-    
-    onMounted(async () => {
-      await getBookData();
-    });
 
     return {
       bookdata,

@@ -7,7 +7,12 @@
     </div>
     <div class="row">
       <div class="column column-12 mt-3 text-left">
-        <h2><span class="my-4">Apart from first 3 assignment I implemented the below concepts for Assignment 4</span></h2>
+        <h2><span class="my-4">For UI design I used Bootstrap included from CDN</span></h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column column-12 mt-3 text-left">
+        <h3><span class="my-4">Apart from first 3 assignment I implemented the below concepts for Assignment 4</span></h3>
         <ol class="mt-3">
           <li><h3>Vue Version 3</h3></li>
           <li><h3>Vue 3 Composition Api</h3></li>

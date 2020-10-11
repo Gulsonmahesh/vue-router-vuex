@@ -97,34 +97,22 @@
       "website": "http://chimera.labs.oreilly.com/books/1234000001708/index.html"
     },
     {
-      "bookname": "New Book",
-      "published": "1002",
-      "price": "1003",
+      "bookname": "Mahesh",
+      "published": "2020",
+      "price": "1234",
       "id": 9
     },
     {
-      "bookname": "Welcome to javascript",
-      "published": "1000",
-      "price": "1111",
+      "bookname": "Test Book",
+      "published": "2019",
+      "price": "2145",
       "id": 10
     },
     {
-      "bookname": "dddd",
-      "published": "1231",
-      "price": "215",
+      "bookname": "asfdgbzdvdasg",
+      "published": "1412",
+      "price": "2424",
       "id": 11
-    },
-    {
-      "bookname": "massdsd",
-      "published": "2001",
-      "price": "101",
-      "id": 12
-    },
-    {
-      "bookname": "Test Book",
-      "published": "2011",
-      "price": "103",
-      "id": 13
     }
   ]
 }

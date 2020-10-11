@@ -18,38 +18,29 @@
   </div>
 </template>
 <script>
-import axios from "axios";
-import { ref, onMounted, computed } from "vue";
+import { computed } from "vue";
 import { useRouter, useRoute } from 'vue-router';
+import { useStore } from 'vuex';
 
 export default {
   name: "Viewbook",
   setup() {
-    let bookdata = ref([]);
     const router = useRouter()
     const route = useRoute();
-
+    const store = useStore();
+    let books = computed( () => store.state.books);
     const bookId = computed( () => route.params.bookid);
+    let bookdata = books.value[bookId.value - 1];
+    
     let navigate = () => {
         router.push({ name: 'Addbook' })
     }
 
-    function getBookData() {
-      axios.get(`http://localhost:3001/books/${bookId.value}`).then((response) => {
-        bookdata.value = response.data;
-      });
-    }
-    
     function returntobooks() {
       router.push({ name: 'Book' });
     }
 
-    onMounted(async () => {
-      await getBookData();
-    });
-
     return {
-      bookId,
       bookdata,
       navigate,
       returntobooks,

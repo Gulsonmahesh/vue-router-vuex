@@ -20,7 +20,8 @@
 <script>
 import { reactive } from 'vue';
 import { onBeforeRouteLeave, useRouter } from 'vue-router';
-import axios from 'axios';
+import { useStore } from 'vuex';
+
 
 export default {
   name: "Bookform",
@@ -30,8 +31,8 @@ export default {
       published : '',
       price: ''
     });
-
-    const innerRouter = useRouter();
+    let store = useStore();    
+    const router = useRouter();
 
     onBeforeRouteLeave((to, from, next) => {
       if(formData.bookname === null && formData.published === '' && formData.price === '') {
@@ -49,16 +50,11 @@ export default {
         alert('Please Enter all the details');
         return false;
       } else {
-        axios.post('http://localhost:3001/books', formData).then( response => {
-          console.log(response);
-          if(response.status === 201) {
-            formData.bookname = null; formData.published = '';formData.price = '';
-            innerRouter.push({ name: 'Book' });
-          } else {
-            alert('Unable to Insert Data');
-            return false;
-          }
-        });
+        store.dispatch('addbook', formData);
+        formData.bookname = null;
+        formData.published = '';
+        formData.price = '';
+        router.push({name: 'Book'})
       }
     }
     

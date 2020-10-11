@@ -19,8 +19,8 @@
               </tr>
               </thead>
               <tbody class="">
-              <tr v-for="(item, index) in bookdata" :key="item.index">
-                  <td scope="row">{{ ++index }}</td>
+              <tr v-for="(item) in bookdata" :key="item.id">
+                  <td scope="row"><router-link class="nav-item nav-link active p-0"  :to="{ name: 'Viewbook', params: { bookid: item.id } }">{{item.id}}</router-link></td>
                   <td class="text-left">{{ item.bookname }}</td>
                   <td>{{ item.published }}</td>
                   <td>${{ item.price }}</td>
@@ -32,7 +32,7 @@
         <div class="d-flex flex-column justify-content-between align-items-left m-1" v-for="(item) in bookdata" :key="item.index">
           <div class="card text-left">
             <div class="card-body">
-                <h2 class="card-title">{{item.bookname}}</h2>
+                <h2 class="card-title"><router-link class="nav-item nav-link active p-0"  :to="{ name: 'Viewbook', params: { bookid: item.id } }">{{item.bookname}}</router-link></h2>
                 <span class="card-text">{{`Publi.Date: ${item.published}`}}</span>
                 <p class="card-text">{{`Price : ${item.price}`}}</p>
                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
@@ -103,6 +103,7 @@ th {
 }
 td {
   font-size: 1.4em;
+  vertical-align: middle;
 }
 h1 {
     font-size: 1.5rem;

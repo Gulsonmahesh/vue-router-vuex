@@ -14,7 +14,7 @@
               <tr>
                   <th scope="col" width="10%">#</th>
                   <th scope="col" class="text-left">Title</th>
-                  <th scope="col" width="18%">Publi. Year</th>
+                  <th scope="col" width="20%">Publi. Year</th>
                   <th scope="col" width="10%">Price</th>
               </tr>
               </thead>
